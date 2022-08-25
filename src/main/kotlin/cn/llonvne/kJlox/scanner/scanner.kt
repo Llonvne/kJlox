@@ -4,7 +4,7 @@ import cn.llonvne.kJlox.error.reportError
 import cn.llonvne.kJlox.token.Token
 import cn.llonvne.kJlox.token.TokenType
 import cn.llonvne.kJlox.token.TokenType.*
-import cn.llonvne.kJlox.token.printableTokenList
+import cn.llonvne.kJlox.token.printableTokenMap
 
 /**
  * # 代码扫描器类，用于将文本拆解为 Token
@@ -95,7 +95,7 @@ class TokenScanner(private val source: Source) {
                 number()
             }
 
-            in 'A'..'Z' -> {
+            in 'A'..'Z' ,in 'a'..'z' -> {
                 identifier()
             }
 
@@ -180,9 +180,7 @@ class TokenScanner(private val source: Source) {
                 advance()
             }
             val text: String = sourceText.substring(start, current)
-            if (text in printableTokenList) {
-                addToken(TokenType.valueOf(text))
-            } else addToken(IDENTIFIER)
+            addToken(printableTokenMap[text] ?: IDENTIFIER)
         }
     }
 
