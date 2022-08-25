@@ -1,5 +1,9 @@
 package cn.llonvne.kJlox.scanner
 
+/**
+ * # 源代码类
+ * 用于封装一些源代码操作
+ */
 class Source(val sourceText: String) {
     var start = 0
     var current = 0
@@ -34,10 +38,16 @@ class Source(val sourceText: String) {
         return false
     }
 
+    /**
+     * ## 返回当前处理的字符，但不前进（不递增 current）
+     */
     fun peek(): Char {
         return if (isAtEnd()) '\u0000' else sourceText[current]
     }
 
+    /**
+     * ## 返回当前处理的字符的下一个字符
+     */
     fun peekNext(): Char {
         return if (current + 1 >= sourceText.length) '\u0000' else sourceText[current + 1]
     }

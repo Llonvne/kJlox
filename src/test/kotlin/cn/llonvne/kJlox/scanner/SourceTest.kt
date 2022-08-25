@@ -50,7 +50,7 @@ internal class SourceTest {
         }
     }
 
-    val sourceText = """
+    private val sourceText = """
             package ui;
             import exec.Exec;
             import ui.UIOperations.UIOPerationsInterface;
@@ -78,7 +78,7 @@ internal class SourceTest {
                 }
             }
         """.trimIndent()
-    val sour = Source(sourceText)
+    private val sour = Source(sourceText)
 
     @Test
     fun test_is_end() {
