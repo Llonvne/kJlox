@@ -23,7 +23,7 @@ class TokenScanner(private val source: Source) {
 
         // 当没有结束当时候不断扫描 Token
         while (!source.isAtEnd()) {
-            source.current = source.start
+            source.start = source.current
             scanSingleToken()
         }
 
@@ -42,7 +42,7 @@ class TokenScanner(private val source: Source) {
             ')' -> addToken(RIGHT_PAREN)
 
             '{' -> addToken(LEFT_BRACE)
-            '}' -> addToken(LEFT_BRACE)
+            '}' -> addToken(RIGHT_BRACE)
 
             ',' -> addToken(COMMA)
             '.' -> addToken(DOT)
@@ -95,7 +95,7 @@ class TokenScanner(private val source: Source) {
                 number()
             }
 
-            in 'A'..'Z' ,in 'a'..'z' -> {
+            in 'A'..'Z', in 'a'..'z' -> {
                 identifier()
             }
 
