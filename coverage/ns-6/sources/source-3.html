@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TokenType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">cn.llonvne.kJlox.token</a>
+</div>
+
+<h1>Coverage Summary for Class: TokenType (cn.llonvne.kJlox.token)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TokenType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package cn.llonvne.kJlox.token
+&nbsp;
+&nbsp;private const val unPrintableTokenStr = &quot;\u0000&quot;;
+&nbsp;
+<b class="fc">&nbsp;enum class TokenType(val value: String?) {</b>
+&nbsp;
+&nbsp;    // Single-character tokens.
+<b class="fc">&nbsp;    LEFT_PAREN(&quot;(&quot;),</b>
+<b class="fc">&nbsp;    RIGHT_PAREN(&quot;)&quot;),</b>
+<b class="fc">&nbsp;    LEFT_BRACE(&quot;{&quot;),</b>
+<b class="fc">&nbsp;    RIGHT_BRACE(&quot;}&quot;),</b>
+<b class="fc">&nbsp;    COMMA(&quot;,&quot;),</b>
+<b class="fc">&nbsp;    DOT(&quot;.&quot;),</b>
+<b class="fc">&nbsp;    MINUS(&quot;-&quot;),</b>
+<b class="fc">&nbsp;    PLUS(&quot;+&quot;),</b>
+<b class="fc">&nbsp;    SEMICOLON(&quot;;&quot;),</b>
+<b class="fc">&nbsp;    SLASH(&quot;/&quot;),</b>
+<b class="fc">&nbsp;    STAR(&quot;*&quot;),</b>
+&nbsp;
+&nbsp;    // One or two character tokens.
+<b class="fc">&nbsp;    BANG(&quot;!&quot;),</b>
+<b class="fc">&nbsp;    BANG_EQUAL(&quot;!=&quot;),</b>
+<b class="fc">&nbsp;    EQUAL(&quot;=&quot;),</b>
+<b class="fc">&nbsp;    EQUAL_EQUAL(&quot;==&quot;),</b>
+<b class="fc">&nbsp;    GREATER(&quot;&gt;&quot;),</b>
+<b class="fc">&nbsp;    GREATER_EQUAL(&quot;&gt;=&quot;),</b>
+<b class="fc">&nbsp;    LESS(&quot;&lt;&quot;),</b>
+<b class="fc">&nbsp;    LESS_EQUAL(&quot;&lt;=&quot;),</b>
+&nbsp;
+&nbsp;    // Literals.
+<b class="fc">&nbsp;    IDENTIFIER(unPrintableTokenStr),</b>
+<b class="fc">&nbsp;    STRING(unPrintableTokenStr),</b>
+<b class="fc">&nbsp;    NUMBER(unPrintableTokenStr),</b>
+&nbsp;
+&nbsp;    // Keywords.
+<b class="fc">&nbsp;    AND(&quot;and&quot;),</b>
+<b class="fc">&nbsp;    CLASS(&quot;class&quot;),</b>
+<b class="fc">&nbsp;    ELSE(&quot;else&quot;),</b>
+<b class="fc">&nbsp;    FALSE(&quot;false&quot;),</b>
+<b class="fc">&nbsp;    FUN(&quot;fun&quot;),</b>
+<b class="fc">&nbsp;    FOR(&quot;for&quot;),</b>
+<b class="fc">&nbsp;    IF(&quot;if&quot;),</b>
+<b class="fc">&nbsp;    NIL(&quot;nil&quot;),</b>
+<b class="fc">&nbsp;    OR(&quot;or&quot;),</b>
+<b class="fc">&nbsp;    PRINT(&quot;print&quot;),</b>
+<b class="fc">&nbsp;    RETURN(&quot;return&quot;),</b>
+<b class="fc">&nbsp;    SUPER(&quot;super&quot;),</b>
+<b class="fc">&nbsp;    THIS(&quot;this&quot;),</b>
+<b class="fc">&nbsp;    TRUE(&quot;true&quot;),</b>
+<b class="fc">&nbsp;    VAR(&quot;var&quot;),</b>
+<b class="fc">&nbsp;    WHILE(&quot;while&quot;),</b>
+&nbsp;
+<b class="fc">&nbsp;    EOF(null);</b>
+&nbsp;}
+&nbsp;
+&nbsp;val printableTokenMap: Map&lt;String, TokenType&gt; by lazy {
+&nbsp;    val map = mutableMapOf&lt;String, TokenType&gt;()
+&nbsp;    for (v in TokenType.values()) {
+&nbsp;        if (v.value == null || v.value == &quot;\u0000&quot;) {
+&nbsp;            continue
+&nbsp;        }
+&nbsp;        map[v.value.toString()] = v
+&nbsp;    }
+&nbsp;    map
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * # 标记数据类
+&nbsp; * @property type 标记类型
+&nbsp; * @property lexeme 词素
+&nbsp; * @property literal 原文本
+&nbsp; * @property line 标记所在行
+&nbsp; */
+&nbsp;data class Token
+&nbsp;    (
+&nbsp;    val type: TokenType,
+&nbsp;    val lexeme: String,
+&nbsp;    val literal: Any?,
+&nbsp;    val line: Int,
+&nbsp;)
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-26 06:35</div>
+</div>
+</body>
+</html>

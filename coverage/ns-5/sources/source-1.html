@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Source</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">cn.llonvne.kJlox.scanner</a>
+</div>
+
+<h1>Coverage Summary for Class: Source (cn.llonvne.kJlox.scanner)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Source</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package cn.llonvne.kJlox.scanner
+&nbsp;
+&nbsp;/**
+&nbsp; * # 源代码类
+&nbsp; * 用于封装一些源代码操作
+&nbsp; */
+<b class="fc">&nbsp;class Source(val sourceText: String) {</b>
+<b class="fc">&nbsp;    var start = 0</b>
+<b class="fc">&nbsp;    var current = 0</b>
+<b class="fc">&nbsp;    var line = 1</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ## 该函数用于界定当前处理到元素(char) 是否到源代码文件尾部
+&nbsp;     * @return 一个 Boolean 值，标识文件是否到达尾部
+&nbsp;     */
+<b class="fc">&nbsp;    fun isAtEnd(): Boolean = current &gt;= sourceText.length</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ## 返回当前未处理的字符，并进位到下一个字符
+&nbsp;     * @return Char 字符
+&nbsp;     */
+&nbsp;    fun advance(): Char {
+<b class="fc">&nbsp;        ++current</b>
+<b class="fc">&nbsp;        return sourceText[current - 1]</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param expected 期待匹配到下一个字符
+&nbsp;     * @return 存在下一个字符且匹配成功返回 true 且跳过下一个字符 ，到达尾部或者匹配失败返回 False
+&nbsp;     */
+&nbsp;    fun match(expected: Char): Boolean {
+<b class="fc">&nbsp;        if (isAtEnd()) return false</b>
+&nbsp;
+<b class="fc">&nbsp;        if (sourceText[current] == expected) {</b>
+<b class="fc">&nbsp;            ++current</b>
+<b class="fc">&nbsp;            return true</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ## 返回当前处理的字符，但不前进（不递增 current）
+&nbsp;     */
+&nbsp;    fun peek(): Char {
+<b class="fc">&nbsp;        return if (isAtEnd()) &#39;\u0000&#39; else sourceText[current]</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ## 返回当前处理的字符的下一个字符
+&nbsp;     */
+&nbsp;    fun peekNext(): Char {
+<b class="fc">&nbsp;        return if (current + 1 &gt;= sourceText.length) &#39;\u0000&#39; else sourceText[current + 1]</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-26 06:35</div>
+</div>
+</body>
+</html>

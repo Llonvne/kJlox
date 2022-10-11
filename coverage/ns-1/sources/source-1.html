@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CompileResult</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">cn.llonvne.kJlox.compiler</a>
+</div>
+
+<h1>Coverage Summary for Class: CompileResult (cn.llonvne.kJlox.compiler)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CompileResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package cn.llonvne.kJlox.compiler
+&nbsp;
+&nbsp;import cn.llonvne.kJlox.main.KJlox
+&nbsp;import java.io.File
+&nbsp;import java.io.FileNotFoundException
+&nbsp;
+&nbsp;/**
+&nbsp; * @brief 编译结果
+&nbsp; */
+&nbsp;enum class CompileResult {
+<b class="fc">&nbsp;    OK,</b>
+<b class="fc">&nbsp;    ScriptFileNotFound,</b>
+<b class="fc">&nbsp;    NotAKJloxFile</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * 源代码变量
+&nbsp; */
+&nbsp;internal var originCode: String = &quot;&quot;
+&nbsp;
+&nbsp;/**
+&nbsp; * @brief 编译主函数
+&nbsp; * @param scriptFile 编译文件文件名
+&nbsp; * @return CompileResult 编译结果枚举类
+&nbsp; */
+&nbsp;fun compile(scriptFile: String): CompileResult {
+&nbsp;
+&nbsp;
+&nbsp;    // 对于输入的文件名进行处理 去除多余空格
+&nbsp;    val trimScriptFile = scriptFile.trim()
+&nbsp;
+&nbsp;    // 检查文件后缀是否符合标准
+&nbsp;    if (!trimScriptFile.endsWith
+&nbsp;            (KJlox.kKloxStandardFileExtension, ignoreCase = true)
+&nbsp;    ) {
+&nbsp;        return CompileResult.NotAKJloxFile
+&nbsp;    }
+&nbsp;
+&nbsp;    // 尝试读取文件
+&nbsp;    try {
+&nbsp;        originCode = File(scriptFile).readText()
+&nbsp;    } catch (e: FileNotFoundException) {
+&nbsp;        return CompileResult.ScriptFileNotFound
+&nbsp;    }
+&nbsp;
+&nbsp;    return CompileResult.OK
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-26 06:35</div>
+</div>
+</body>
+</html>

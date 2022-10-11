@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > KJlox</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">cn.llonvne.kJlox.main</a>
+</div>
+
+<h1>Coverage Summary for Class: KJlox (cn.llonvne.kJlox.main)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KJlox</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">KJlox$WorkMode</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package cn.llonvne.kJlox.main
+&nbsp;
+&nbsp;import cn.llonvne.kJlox.compiler.compile
+&nbsp;import cn.llonvne.kJlox.interpreter.interpret
+&nbsp;import kotlin.system.exitProcess
+&nbsp;
+&nbsp;object KJlox {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @brief 定义程序语言名字
+&nbsp;     */
+&nbsp;    const val kJloxName = &quot;kJlox&quot;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @beief 定义文件标准后缀名
+&nbsp;     */
+&nbsp;    const val kKloxStandardFileExtension = &quot;kj&quot;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 定义工作模式
+&nbsp;     * 一共有三种模式，两种有效，一种错误
+&nbsp;     * 分别为
+&nbsp;     * ArgsInvalid 参数错误
+&nbsp;     * InterpreterMode 解释器模式
+&nbsp;     * CompilerMode 编译器模式
+&nbsp;     */
+<b class="nc">&nbsp;    internal enum class WorkMode(exitCode: Int) {</b>
+<b class="nc">&nbsp;        ArgsInvalid(-1),</b>
+<b class="nc">&nbsp;        InterpreterMode(0),</b>
+<b class="nc">&nbsp;        CompilerMode(0)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @brief 定义标准的前缀打印
+&nbsp;     */
+&nbsp;    @JvmStatic
+&nbsp;    fun printkJloxPrefix() {
+<b class="fc">&nbsp;        print(&quot;$kJloxName: &quot;)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 在主类中定义错误标记
+&nbsp;     */
+<b class="fc">&nbsp;    var hasError: Boolean = false</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * @brief 主函数，负责选择模式
+&nbsp; * @param args 命令行参数
+&nbsp; */
+&nbsp;fun main(vararg args: String) {
+&nbsp;    when (selectWorkMode(args.toList())) {
+&nbsp;
+&nbsp;        KJlox.WorkMode.ArgsInvalid -&gt; {
+&nbsp;            KJlox.printkJloxPrefix()
+&nbsp;            println(&quot;Wrong parameter length,Usage: kjlox [script file]&quot;)
+&nbsp;            exitProcess(KJlox.WorkMode.ArgsInvalid.ordinal)
+&nbsp;        }
+&nbsp;
+&nbsp;        KJlox.WorkMode.CompilerMode -&gt; {
+&nbsp;            compile(args[0])
+&nbsp;        }
+&nbsp;
+&nbsp;        KJlox.WorkMode.InterpreterMode -&gt; {
+&nbsp;            interpret()
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * @brief 接受命令行输入，决定工作模式
+&nbsp; * @param args 命令行参数
+&nbsp; * @return Kjlox.handleInputParaStatus 枚举类结果
+&nbsp; */
+&nbsp;private fun selectWorkMode(args: List&lt;String&gt;): KJlox.WorkMode {
+&nbsp;    return when (args.size) {
+&nbsp;        0 -&gt; KJlox.WorkMode.InterpreterMode
+&nbsp;
+&nbsp;        1 -&gt; KJlox.WorkMode.InterpreterMode
+&nbsp;
+&nbsp;        else -&gt; KJlox.WorkMode.ArgsInvalid
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-26 06:35</div>
+</div>
+</body>
+</html>
