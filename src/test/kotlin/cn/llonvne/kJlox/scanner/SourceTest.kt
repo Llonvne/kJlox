@@ -136,4 +136,14 @@ internal class SourceTest {
             assert(i == sour.current)
         }
     }
+
+    @Test
+    fun test_reset_current() {
+        sour.advance()
+        sour.advance()
+        sour.resetCurrent()
+        assertEquals(0, sour.current)
+        sour.resetCurrent(sour.sourceText.length)
+        assertEquals(sour.current, sour.sourceText.length)
+    }
 }

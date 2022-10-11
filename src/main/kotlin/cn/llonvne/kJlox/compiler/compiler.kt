@@ -23,7 +23,7 @@ internal var originCode: String = ""
  * @param scriptFile 编译文件文件名
  * @return CompileResult 编译结果枚举类
  */
-fun compile(scriptFile: String): CompileResult {
+fun compiler(scriptFile: String): CompileResult {
 
 
     // 对于输入的文件名进行处理 去除多余空格
@@ -31,7 +31,7 @@ fun compile(scriptFile: String): CompileResult {
 
     // 检查文件后缀是否符合标准
     if (!trimScriptFile.endsWith
-            (KJlox.kKloxStandardFileExtension, ignoreCase = true)
+            (KJlox.kJloxStandardFileExtension, ignoreCase = true)
     ) {
         return CompileResult.NotAKJloxFile
     }
@@ -42,6 +42,10 @@ fun compile(scriptFile: String): CompileResult {
     } catch (e: FileNotFoundException) {
         return CompileResult.ScriptFileNotFound
     }
+
+    val source = cn.llonvne.kJlox.scanner.Source(originCode)
+    val tokens = cn.llonvne.kJlox.scanner.TokenScanner(source).scanTokens()
+//    val parser = Parser(tokens).parse()
 
     return CompileResult.OK
 }

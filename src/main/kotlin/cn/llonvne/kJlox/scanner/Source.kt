@@ -51,4 +51,11 @@ class Source(val sourceText: String) {
     fun peekNext(): Char {
         return if (current + 1 >= sourceText.length) '\u0000' else sourceText[current + 1]
     }
+
+    /**
+     * # 重新设置Current位置，默认设置到头部0坐标
+     */
+    fun resetCurrent(index: Int = 0) {
+        this.current = index
+    }
 }

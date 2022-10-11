@@ -7,6 +7,6 @@ internal class CompilerKtTest {
 
     @Test
     fun test_compileScriptFileNotFound() {
-        assertEquals(CompileResult.ScriptFileNotFound, compile("NotExistFile.kj"))
+        assertEquals(CompileResult.ScriptFileNotFound, compiler("NotExistFile.kj"))
     }
 }
